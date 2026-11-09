@@ -1,0 +1,29 @@
+{
+  "name": "erp-newsletters",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host localhost",
+    "build": "vite build",
+    "preview": "vite preview --host localhost",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.6.1",
+    "antd": "^5.23.2",
+    "dayjs": "^1.11.13",
+    "grapesjs": "^0.22.13",
+    "grapesjs-preset-newsletter": "^1.0.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.18.5"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.3.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "jsdom": "^26.1.0",
+    "vite": "^6.0.7",
+    "vitest": "^5.1.0"
+  }
+}
