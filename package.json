@@ -9,8 +9,9 @@
     "preview": "vite preview --host localhost",
     "test": "vitest run",
     "push-all-changes": "git add . && git commit -m\"update\" && git push origin",
-    "fetch-all": "git fetch origin && git merge origin/main"
-  },
+    "fetch-all": "git fetch origin && git merge origin/main",
+    "update": "git fetch origin && git reset --hard origin/main && npm install && npm run build"
+},
   "dependencies": {
     "@ant-design/icons": "^5.6.1",
     "antd": "^5.23.2",
