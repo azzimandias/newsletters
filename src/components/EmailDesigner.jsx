@@ -4,6 +4,39 @@ import { UploadOutlined } from '@ant-design/icons';
 import { post } from '../api';
 import { variables } from '../domain';
 import 'grapesjs/dist/css/grapes.min.css';
+import ru from 'grapesjs/locale/ru.mjs';
+
+const editorMessages = {
+  ...ru,
+  styleManager: {
+    ...ru.styleManager,
+    sectors: { ...ru.styleManager.sectors, dimension: 'Размеры' },
+    properties: {
+      ...ru.styleManager.properties,
+      width: 'Ширина', height: 'Высота', 'max-width': 'Максимальная ширина', 'min-height': 'Минимальная высота',
+      margin: 'Внешний отступ', padding: 'Внутренний отступ',
+      'font-family': 'Шрифт', 'font-size': 'Размер шрифта', 'font-weight': 'Толщина шрифта',
+      'letter-spacing': 'Межбуквенный интервал', color: 'Цвет текста', 'line-height': 'Межстрочный интервал',
+      'text-align': 'Выравнивание текста', 'text-decoration': 'Оформление текста', 'font-style': 'Начертание',
+      'vertical-align': 'Вертикальное выравнивание', 'text-shadow': 'Тень текста',
+      'background-color': 'Цвет фона', 'border-collapse': 'Объединение границ', 'border-radius': 'Скругление углов',
+      border: 'Граница', background: 'Фон',
+    },
+  },
+  domComponents: { ...ru.domComponents, names: { ...ru.domComponents.names, image: 'Изображение', video: 'Видео' } },
+  traitManager: {
+    ...ru.traitManager,
+    empty: 'Выберите элемент для настройки',
+    traits: { ...ru.traitManager.traits, labels: { id: 'Идентификатор', alt: 'Описание изображения', href: 'Адрес ссылки', title: 'Подсказка', target: 'Открывать ссылку' } },
+  },
+  panels: { ...ru.panels, buttons: { ...ru.panels.buttons, titles: {
+    ...ru.panels.buttons.titles,
+    'open-sm': 'Стили', 'open-layers': 'Слои', 'open-blocks': 'Блоки',
+    'set-device-desktop': 'Компьютер', 'set-device-tablet': 'Планшет', 'set-device-mobile': 'Телефон',
+    'gjs-open-import-template': 'Импорт шаблона', 'gjs-toggle-images': 'Показать или скрыть изображения',
+    undo: 'Отменить действие', redo: 'Повторить действие', 'canvas-clear': 'Очистить макет',
+  } } },
+};
 
 const initial = '<table role="presentation" width="100%" style="background:#f4f5f2;padding:24px"><tr><td><table role="presentation" align="center" width="600" style="background:#fff;padding:32px;font-family:Arial,sans-serif;color:#243a30"><tr><td><h1>Расскажите о главном</h1><p>Здравствуйте!</p><p>Добавьте сюда новости, предложение или приглашение на семинар.</p><p>С уважением,<br>{{company_name}}</p></td></tr></table></td></tr></table>';
 
@@ -22,7 +55,11 @@ export default function EmailDesigner({ value, companyId, onChange, disabled, ca
       if (cancelled) return;
       editor = g.default.init({
         container: container.current, height: '650px', storageManager: false, fromElement: false,
-        plugins: [plugin.default], pluginsOpts: { [plugin.default]: { inlineCss: true } },
+        i18n: { locale: 'ru', detectLocale: false, messages: { ru: editorMessages } },
+        plugins: [plugin.default], pluginsOpts: { [plugin.default]: {
+          inlineCss: true, modalTitleImport: 'Импорт шаблона', modalTitleExport: 'Экспорт шаблона',
+          modalBtnImport: 'Импортировать', textCleanCanvas: 'Очистить макет письма?',
+        } },
         assetManager: { upload: false, autoAdd: false },
         canvas: { scripts: [], styles: [] },
         parser: { optionsHtml: { allowScripts: false, allowUnsafeAttr: false } },
