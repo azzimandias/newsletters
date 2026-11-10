@@ -7,7 +7,9 @@
     "dev": "vite --host localhost",
     "build": "vite build",
     "preview": "vite preview --host localhost",
-    "test": "vitest run"
+    "test": "vitest run",
+    "push-all-changes": "git add . && git commit -m\"update\" && git push origin",
+    "fetch-all": "git fetch origin && git merge origin/main"
   },
   "dependencies": {
     "@ant-design/icons": "^5.6.1",
