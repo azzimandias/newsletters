@@ -60,7 +60,13 @@ export default function EmailDesigner({ value, companyId, onChange, disabled, ca
           inlineCss: true, modalTitleImport: 'Импорт шаблона', modalTitleExport: 'Экспорт шаблона',
           modalBtnImport: 'Импортировать', textCleanCanvas: 'Очистить макет письма?',
         } },
-        assetManager: { upload: false, autoAdd: false },
+        assetManager: {
+          disableUpload: false, autoAdd: false, multiUpload: false, accept: 'image/jpeg,image/png',
+          uploadFile(event, callback, options) {
+            const file = (event.dataTransfer?.files || event.target?.files)?.[0];
+            return upload(file, options?.componentView?.model || editor.getSelected(), true);
+          },
+        },
         canvas: { scripts: [], styles: [] },
         parser: { optionsHtml: { allowScripts: false, allowUnsafeAttr: false } },
       });
@@ -82,16 +88,19 @@ export default function EmailDesigner({ value, companyId, onChange, disabled, ca
     }).catch(e => { if (!cancelled) { setError(`Не удалось открыть редактор: ${e.message}`); setLoading(false); } });
     return () => { cancelled = true; instance.current = null; if (captureRef) captureRef.current = null; editor?.destroy(); };
   }, []);
-  async function upload(file) {
+  async function upload(file, selected = instance.current?.getSelected(), fromDialog = false) {
     if (!file) return;
+    const editor = instance.current;
+    if (!editor) return;
     try {
       const form = new FormData(); form.append('company_id', companyId); form.append('kind', 'image'); form.append('file', file);
       const asset = await post('assets', form);
       if (!asset.url?.startsWith('https://')) { message.error('Для изображений администратор должен настроить публичный HTTPS-адрес.'); return; }
-      instance.current?.AssetManager.add({ src: asset.url, name: file.name });
-      const selected = instance.current?.getSelected();
+      if (instance.current !== editor) return;
+      editor.AssetManager.add({ src: asset.url, name: file.name });
       if (selected?.is('image')) selected.set('src', asset.url);
-      else instance.current?.addComponents({ type: 'image', src: asset.url, style: { 'max-width': '100%' } });
+      else if (!fromDialog) editor.addComponents({ type: 'image', src: asset.url, style: { 'max-width': '100%' } });
+      if (fromDialog && selected?.is('image') && editor.getSelected() === selected) editor.AssetManager.close();
       message.success('Изображение добавлено');
     } catch (e) { message.error(e.message); }
     finally { if (fileInput.current) fileInput.current.value = ''; }
