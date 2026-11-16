@@ -20,7 +20,7 @@ export default function App() {
   const { section, campaignId, '*': unmatched } = useParams();
   const [query] = useSearchParams();
   const companyId = query.get('company_id');
-  const companies = session.data?.companies || [];
+  const companies = (session.data?.companies || []).filter(c => c.name?.trim().toLowerCase() !== 'freecompany');
   const company = companyId ? companies.find(c => String(c.id) === companyId) : companies[0];
   const [dirty, setDirty] = useState(false);
   const { modal } = AntApp.useApp();
@@ -60,7 +60,7 @@ export default function App() {
     <Layout>
       <div className="sticky-controls">
         <header className="global-header"><Space><a className="home-link" title="На главную ERP" aria-label="На главную ERP" href={homeUrl} onClick={event => { if (dirty) { event.preventDefault(); confirmLeave(() => { window.location.assign(homeUrl); }); } }}><HomeOutlined /></a><span className="eyebrow">Рассылки</span></Space><div className="user-profile"><Avatar size={23} shape="square" style={{ background: '#31465f' }}>{session.data?.user.name?.[0] || 'E'}</Avatar><strong>{session.data?.user.name || 'ERP'}</strong></div></header>
-        <div className="module-toolbar"><Menu mode="horizontal" selectedKeys={[page]} items={menus.map(({ allowed, ...item }) => ({ ...item, label: <Link to={pathFor(item.key)}>{item.label}</Link> }))} /><Space><span className="muted">Компания</span><Select aria-label="Компания отправителя" className="company-select" value={company?.id} loading={session.loading} options={session.data?.companies.map(c => ({ value: c.id, label: c.name })) || []} onChange={id => go(pathFor(companies.find(c => c.id === id)?.permissions.view ? 'campaigns' : companies.find(c => c.id === id)?.permissions.settings ? 'settings' : 'help', null, id))} /></Space></div>
+        <div className="module-toolbar"><Menu mode="horizontal" selectedKeys={[page]} items={menus.map(({ allowed, ...item }) => ({ ...item, label: <Link to={pathFor(item.key)}>{item.label}</Link> }))} /><Space><span className="muted">Компания</span><Select aria-label="Компания отправителя" className="company-select" value={company?.id} loading={session.loading} options={companies.map(c => ({ value: c.id, label: c.name }))} onChange={id => go(pathFor(companies.find(c => c.id === id)?.permissions.view ? 'campaigns' : companies.find(c => c.id === id)?.permissions.settings ? 'settings' : 'help', null, id))} /></Space></div>
       </div>
       <main className="main-content">
         {page === 'help' && validPath ? <Help /> : session.loading ? <div className="loading-screen"><Spin size="large" /><p>Подключаемся к ERP…</p></div> : session.error ? <div className="connection-error"><h1>Подключение к ERP</h1><Failure error={session.error} retry={session.refresh}/><p>Для работы нужна активная сессия ERP и доступ к модулю рассылок.</p><Button href={import.meta.env.VITE_LOGIN_URL || '/login'}>Открыть вход в ERP</Button></div> : !company ? <Alert type="info" showIcon message={companyId ? "Выбранная компания недоступна" : "Нет доступных компаний"} description="Попросите администратора назначить права на модуль рассылок."/> : !validPath || !['campaigns', 'lists', 'templates', 'journal', 'settings', 'help'].includes(page) ? <Alert type="info" message="Страница не найдена" /> : !menus.some(item => item.key === page) ? <Alert type="warning" message="Нет доступа к этому разделу" /> : <>
