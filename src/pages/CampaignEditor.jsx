@@ -5,7 +5,7 @@ import { ArrowLeftOutlined, SaveOutlined, UploadOutlined, SendOutlined, ReloadOu
 import { allPages, apiUrl, get, jsonValue, patch, post } from '../api';
 import { useLoad } from '../hooks';
 import { canLaunch, date, moscowSchedule, number, reasons, variables } from '../domain';
-import { Failure, pager, Preview, Status } from '../components/Common';
+import { PageToolbar, Failure, pager, Preview, Status } from '../components/Common';
 import Results from './Results';
 
 import TemplateEditor from '../components/TemplateEditor';
@@ -140,7 +140,7 @@ export default function CampaignEditor({ id, company, permissions, session, navi
   const selectedTemplate = resources.data?.templates.find(t => t.id === draft.template_id);
   const mayLaunch = canLaunch({ campaign, version, tests: tests.data?.data, dirty, canSend: permissions.send }) && session.sending_enabled;
   return <>
-    <header className="campaign-heading">
+    <PageToolbar><header className="campaign-heading">
       <Button icon={<ArrowLeftOutlined/>} aria-label="К списку рассылок" title="К списку рассылок" onClick={() => navigate('campaigns')} />
       <span className="campaign-number">Рассылка<strong>№ {id}</strong></span>
       <div className="campaign-identity">
@@ -157,7 +157,7 @@ export default function CampaignEditor({ id, company, permissions, session, navi
       {permissions.send && campaign?.status === 'scheduled' && <Button onClick={() => action('draft')}>Вернуть в черновик</Button>}
       {permissions.send && ['running', 'scheduled', 'paused'].includes(campaign?.status) && <Popconfirm title="Отменить рассылку?" description="Уже переданные письма отозвать нельзя." onConfirm={() => action('cancel')}><Button danger>Отменить</Button></Popconfirm>}
       </Space>
-    </header>
+    </header></PageToolbar>
     <Failure error={state.error} retry={state.refresh}/><Failure error={resources.error} retry={resources.refresh}/>
     {campaign?.pause_reason && <Alert type="warning" showIcon message={`Причина паузы: ${campaign.pause_reason === 'manual' ? 'Остановлена пользователем' : campaign.pause_reason === 'connection_disabled' ? 'SMTP-подключение отключено' : 'Ошибка почтового подключения'}`}/>}
     <Tabs activeKey={activeTab} onChange={openTab} destroyInactiveTabPane items={[

@@ -1,7 +1,7 @@
 import { useTableFilters } from '../components/useTableFilters';
 import { useState } from 'react';
 import { App, Button, Form, Input, Modal, Select, Space, Table } from 'antd';
-import { PlusOutlined, ArrowRightOutlined, CopyOutlined, ReloadOutlined } from '@ant-design/icons';
+import { PlusOutlined, ArrowRightOutlined, CopyOutlined } from '@ant-design/icons';
 import { get, post } from '../api';
 import { useLoad } from '../hooks';
 import { date, statusLabels } from '../domain';
@@ -23,7 +23,7 @@ export default function Campaigns({ company, permissions, navigate }) {
   }
   return <>
     <PageHead title="Рассылки">
-      <Button icon={<ReloadOutlined/>} onClick={list.refresh}>Обновить</Button>{permissions.edit && <Button type="primary" icon={<PlusOutlined/>} onClick={() => { form.resetFields(); setOpen(true); }}>Создать рассылку</Button>}
+      {permissions.edit && <Button type="primary" icon={<PlusOutlined/>} onClick={() => { form.resetFields(); setOpen(true); }}>Создать рассылку</Button>}
     </PageHead>
     <Failure error={list.error} retry={list.refresh}/>
       <Table className="campaigns-table campaign-list" rowKey="id" loading={list.loading} dataSource={list.data?.data || []} pagination={pager(list.data, setPage)} scroll={{ x: 920 }} locale={{ emptyText: Object.keys(filters).length ? 'По выбранным фильтрам рассылок нет' : <Blank title="Первая рассылка начинается здесь" description="Создайте письмо, выберите контакты и отправьте тест."/> }} columns={[
