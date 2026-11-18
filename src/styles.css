@@ -2,7 +2,7 @@
 * { box-sizing:border-box; }
 body { margin:0; min-width:360px; background:var(--page-bg); }
 button,input,select,textarea { font:inherit; }
-.app-shell { width:calc(100% - 20px); max-width:2200px; min-height:100vh; margin:0 auto; padding:0 0 12px; background:var(--page-bg); }
+.app-shell { width:calc(100% - 20px); /*max-width:2200px;*/ min-height:100vh; margin:0 auto; padding:0 0 12px; background:var(--page-bg); }
 .app-shell .ant-layout { background:transparent; }
 .sticky-controls { position:sticky; top:0; z-index:20; background:white; margin-inline:-10px; padding:8px 10px 6px; border-bottom:1px solid var(--border-strong); }
 .global-header { min-height:30px; display:flex; justify-content:space-between; align-items:center; gap:16px; padding-bottom:6px; border-bottom:1px solid #c4ccd5; }
@@ -12,16 +12,16 @@ button,input,select,textarea { font:inherit; }
 .global-header .ant-menu { background:transparent; border:0; flex:1; min-width:0; line-height:34px; }
 .global-header .ant-menu-item { padding-inline:12px; font-size:12px; }
 .global-header .ant-menu-item-selected { background:#dbe7f3; border-radius:3px; }
-.main-content { padding:8px 0; }
+.main-content { padding: 0 0 8px 0; }
 .page-head { display:flex; justify-content:space-between; align-items:center; gap:12px; margin:7px 0 12px; }
 .page-toolbar .page-head { margin:0; padding-top:6px; flex-direction:row; align-items:center; flex-wrap:wrap; }
 .page-head .eyebrow { display:block; margin-bottom:4px; }
-h1 { margin:0; font-size:22px; line-height:1.15; font-weight:700; color:#172033; }
+h1 { margin:0; font-size:22px; line-height:1.15; font-weight:600; color:#172033; }
 h2 { font-size:14px; font-weight:800; }
 h3 { font-size:14px; }
 .page-head p { margin:6px 0 0; font-size:12px; color:#536274; }
 .muted, small { color:#536274; font-size:12px; }
-.ant-card { margin-bottom:8px; box-shadow:none; border-color:var(--border); border-radius:4px; }
+.ant-card { margin-bottom:8px; box-shadow:none; border-color:var(--border); border-radius:0; }
 .ant-card .ant-card-head { min-height:38px; padding:0 12px; font-size:13px; background:#d4dfed; color:#213d60; border-bottom-color:#acbed2; }
 .ant-card .ant-card-body { padding:12px; }
 .table-card .ant-card-body { padding:0; }
@@ -35,7 +35,7 @@ h3 { font-size:14px; }
 .table-subtitle { margin-top:3px; font-size:11px; }
 .ant-tag { border-radius:3px; font-size:11px; line-height:20px; }
 .ant-btn { box-shadow:none; }
-.ant-btn.ant-btn-primary:not(.ant-btn-dangerous):enabled {
+/*.ant-btn.ant-btn-primary:not(.ant-btn-dangerous):enabled {
   color: #fff;
   border-color: #194c94;
   background: linear-gradient(#306ec2, #20569f);
@@ -48,6 +48,12 @@ h3 { font-size:14px; }
   transform: translateY(1px);
   background: #204f90;
   box-shadow: inset 0 2px 3px #12386766;
+}*/
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:first-child {
+    border-start-start-radius: 0;
+}
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:last-child {
+    border-start-end-radius: 0;
 }
 .ant-alert { margin-bottom:8px; border-radius:4px; padding:8px 12px; }
 .environment-banner { font-size:12px; }
@@ -93,18 +99,19 @@ h3 { font-size:14px; }
 .ant-modal .ant-descriptions { margin-top:12px; }
 .ant-tabs-nav { margin-bottom:8px !important; }
 .ant-tabs-tab { padding:8px 0 !important; }
-@media(min-width:1500px) { .main-content { max-width:1900px; width:100%; margin-inline:auto; } }
+.ant-card .ant-card-head { border-radius: 0; }
+@media(min-width:1500px) { .main-content { /*max-width:1900px;*/ width:100%;/* margin-inline:auto;*/ } }
 @media(max-width:1000px) { .stat-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }.page-head { align-items:flex-start; }.page-head > .ant-space { justify-content:flex-end; } }
 @media(max-width:650px) { .app-shell { width:calc(100% - 12px); }.field-grid { grid-template-columns:1fr; }.page-head { flex-direction:column; }.stat-grid,.stat-grid.four { grid-template-columns:repeat(2,minmax(0,1fr)); }.steps-card .ant-card-body { padding:8px; }.designer-tools small { display:none; }.ant-card .ant-card-head { padding:0 8px; }.ant-card .ant-card-body { padding:8px; }.table-card .ant-card-body { padding:0; }.sticky-controls { position:relative; margin-inline:-6px; padding-inline:6px; } }
 
 .campaign-heading { display:flex; flex-wrap:wrap; align-items:center; gap:8px; padding-top:6px; }
-.campaign-number { display:grid; align-content:center; box-sizing:border-box; min-height:32px; padding:2px 7px; background:white; border:1px solid #9aaabd; border-radius:3px; color:#1f4f82; font-size:10px; line-height:12px; font-weight:700; text-transform:uppercase; }
+.campaign-number { display:grid; align-content:center; box-sizing:border-box; min-height:32px; padding:2px 7px; background:white; border:1px solid #9aaabd; border-radius:3px; color:#1f4f82; font-size:12px; line-height:13px; font-weight:700; text-transform:uppercase; }
 .campaign-identity { display:flex; align-items:baseline; flex-wrap:wrap; gap:7px; flex:1 1 220px; min-width:0; overflow-wrap:anywhere; }
 .campaign-identity h1 { margin:0; font-size:20px; line-height:1.2; font-weight:600; }
 .campaign-separator { color:#8998a8; font-weight:700; }
 .campaign-company { font-size:12px; font-weight:700; text-transform:uppercase; color:#506277; }
 .campaign-actions { margin-left:auto; }
-.campaign-heading-status .ant-tag { margin:0; padding:2px 12px; font-size:16px; font-weight:600; line-height:26px; }
+.campaign-heading-status .ant-tag { margin:0; padding:2px 12px; font-size:14px; font-weight:600; line-height:26px; }
 @media (max-width:650px) { .campaign-actions { width:100%; margin-left:0; } }
 
 .attachment-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 12px 0 8px; }
@@ -120,7 +127,7 @@ h3 { font-size:14px; }
 .campaigns-table .ant-table-thead > tr > th { background:#587493; border-inline-end:0; }
 .campaigns-table .ant-table-thead > tr > th:not(:last-child) { border-inline-end:1px solid #4e6986; }
 .campaigns-table .ant-table-thead > tr > th::before { display:none; }
-.campaign-list { border:1px solid var(--border); border-radius:4px; overflow:hidden; }
+.campaign-list { border-left:1px solid var(--border); border-right:1px solid var(--border);border-bottom:1px solid var(--border); /*border-radius:4px;*/ overflow:hidden; }
 .campaign-list .ant-table-pagination { background:var(--surface); margin:0 !important; padding:8px; border-radius:0 0 4px 4px; }
 
 .editor-table-card { overflow:hidden; }
