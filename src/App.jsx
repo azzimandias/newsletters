@@ -65,16 +65,16 @@ export default function App() {
     </Modal>
     <Layout>
       <div className="sticky-controls">
-        <header className="global-header"><Space><a className="home-link" title="На главную ERP" aria-label="На главную ERP" href={homeUrl} onClick={event => { if (dirty) { event.preventDefault(); confirmLeave(() => { window.location.assign(homeUrl); }); } }}><HomeOutlined /></a><span className="eyebrow">Рассылки</span></Space>
+        <header className="global-header ui-topmenu"><Space><a className="home-link" title="На главную ERP" aria-label="На главную ERP" href={homeUrl} onClick={event => { if (dirty) { event.preventDefault(); confirmLeave(() => { window.location.assign(homeUrl); }); } }}><HomeOutlined /></a><span className="eyebrow">Рассылки</span></Space>
           <Menu mode="horizontal" selectedKeys={[page]} items={menus.map(({ allowed, ...item }) => ({ ...item, label: <Link to={pathFor(item.key)}>{item.label}</Link> }))} />
-          <div className="user-profile"><Avatar size={23} shape="square" style={{ background: '#31465f' }}>{session.data?.user.name?.[0] || 'E'}</Avatar><strong>{session.data?.user.name || 'ERP'}</strong></div></header>
+          <div className="user-profile"><Avatar size={23} shape="square" style={{ background: 'var(--sk-active-button)' }}>{session.data?.user.name?.[0] || 'E'}</Avatar><strong>{session.data?.user.name || 'ERP'}</strong></div></header>
         <div className="page-toolbar" ref={setToolbar} />
       </div>
       <ToolbarContext.Provider value={toolbar}>
       <main className="main-content">
         {page === 'help' && validPath ? <Help /> : session.loading ? <div className="loading-screen"><Spin size="large" /><p>Подключаемся к ERP…</p></div> : session.error ? <div className="connection-error"><PageHead title="Подключение к ERP" /><Failure error={session.error} retry={session.refresh}/><p>Для работы нужна активная сессия ERP и доступ к модулю рассылок.</p><Button href={import.meta.env.VITE_LOGIN_URL || '/login'}>Открыть вход в ERP</Button></div> : !company ? <Alert type="info" showIcon message={companyId ? "Выбранная компания недоступна" : "Нет доступных компаний"} description="Попросите администратора назначить права на модуль рассылок."/> : !validPath || !['campaigns', 'lists', 'templates', 'journal', 'settings', 'help'].includes(page) ? <Alert type="info" message="Страница не найдена" /> : !menus.some(item => item.key === page) ? <Alert type="warning" message="Нет доступа к этому разделу" /> : <>
           {notices}
-          <div key={company.id}>
+          <div key={company.id} className={`page-content${['campaigns', 'lists', 'templates', 'journal', 'settings'].includes(page) && !campaignId ? ' page-content--table' : ''}`}>
             {page === 'campaigns' && (campaignId ? <CampaignEditor key={campaignId} id={campaignId} {...context} /> : <Campaigns {...context}/>)}
             {page === 'lists' && <Lists {...context}/>}
             {page === 'templates' && <Templates {...context}/>}

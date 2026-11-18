@@ -1,0 +1,365 @@
+/*
+ * Тема «Общая». Для переноса подключите файл после базовых стилей приложения
+ * и задайте <html data-page-theme="main">. Таблица данных использует класс
+ * ui-table, карточка — ui-card с ui-card-heading и ui-card-body,
+ * основная кнопка — ui-button-primary. Для таблиц на CSS Grid используйте
+ * те же переменные высоты и типографики, сохраняя сетку колонок страницы.
+ */
+html[data-page-theme="main"] {
+    --ui-font: Inter, "Segoe UI", Arial, sans-serif;
+    --ui-text-size: 14px;
+    --ui-heading-size: 12px;
+    --ui-heading-weight: 600;
+    --ui-heading-height: 40px;
+    --ui-row-height: 31px;
+    --ui-cell-padding: 2px 10px;
+    --ui-card-padding: 12px;
+    --ui-card-radius: 0px;
+    --ui-card-shadow: none;
+    --ui-surface: #fff;
+    --ui-text: #182433;
+    --ui-heading-bg: #506b89;
+    --ui-heading-text: #fff;
+    --ui-heading-divider: #435d78;
+    --ui-divider: #dbe3ec;
+    --ui-border: #b9c3ce;
+    --ui-alt-row: #f5f8fa;
+    --ui-hover-row: #e5eff8;
+    --ui-section-bg: #d4dfed;
+    --ui-nav-height: 46px;
+    --ui-nav-tab-size: 13px;
+    --ui-profile-tab-size: 15px;
+    --ui-pagebar-height: 46px;
+    --ui-bar-gutter: 8px;
+    --ui-bar-gap: 8px;
+    --ui-bar-border: #8f9dad;
+    --ui-nav-active-bg: #dbe7f3;
+    --ui-page-title-size: 20px;
+    --ui-pagination-size: 32px;
+    --ui-pagination-padding: 8px;
+    --ui-pagination-gap: 8px;
+    --ui-pagination-radius: 4px;
+    --sk-active-button: #324760;
+    --sk-active-button-hover: #293b50;
+}
+
+html[data-page-theme="main"] body :is(
+    .ui-button-primary,
+    .ant-btn-primary,
+    .ant-btn[aria-pressed="true"],
+    .ant-btn-color-primary.ant-btn-variant-solid,
+    .ant-radio-button-wrapper-checked,
+    .sk-gtr-button.active,
+    .sk-form-button-stack > .sk-active
+):not(:disabled, .ant-btn-disabled, .ant-btn-dangerous, .ant-radio-button-wrapper-disabled) {
+    background: var(--sk-active-button) !important;
+    border-color: var(--sk-active-button) !important;
+    color: white !important;
+}
+
+
+html[data-page-theme="main"] body {
+    font-family: var(--ui-font);
+    font-size: var(--ui-text-size);
+    color: var(--ui-text);
+}
+
+html[data-page-theme="main"] .ui-table {
+    border-spacing: 0;
+}
+
+html[data-page-theme="main"] :is(.ui-table, .ant-table, .ant-btn, .ant-input, .ant-select, .ant-picker, .ant-modal, .ant-drawer) {
+    font-family: var(--ui-font);
+    font-size: var(--ui-text-size);
+}
+
+html[data-page-theme="main"] .ui-table > tbody > tr > :is(th, td),
+html[data-page-theme="main"] .ant-table-tbody > tr.ant-table-row > td {
+    box-sizing: border-box;
+    height: var(--ui-row-height);
+    padding: var(--ui-cell-padding);
+    border-bottom: 1px solid var(--ui-divider);
+}
+
+html[data-page-theme="main"] .ui-table > thead > tr > :is(th, td),
+html[data-page-theme="main"] .ant-table-wrapper .ant-table-thead > tr > :is(th, td) {
+    height: var(--ui-heading-height);
+    box-sizing: border-box;
+    padding: var(--ui-cell-padding);
+    background-color: var(--ui-heading-bg);
+    color: var(--ui-heading-text);
+    font-size: var(--ui-heading-size);
+    font-weight: var(--ui-heading-weight);
+    border-inline-end: 1px solid var(--ui-heading-divider);
+}
+
+html[data-page-theme="main"] .ui-table > tbody:last-of-type > tr:last-child > :is(td, th),
+html[data-page-theme="main"] .ant-table-wrapper .ant-table-tbody > tr:last-child > :is(td, th) {
+    border-block-end: 1px solid var(--ui-divider);
+}
+
+/* Для Pagination используйте обёртку ui-pagination.
+   Пагинация встроенных таблиц Ant Design получает оформление автоматически. */
+html[data-page-theme="main"] :is(.ui-pagination, .ant-table-wrapper .ant-table-pagination) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    flex: none;
+    box-sizing: border-box;
+    height: auto;
+    margin: 0;
+    padding: var(--ui-pagination-padding);
+    border: 1px solid var(--ui-border);
+    background: var(--ui-surface);
+}
+
+html[data-page-theme="main"] .ant-pagination {
+    font-family: var(--ui-font);
+    font-size: var(--ui-heading-size);
+    color: var(--ui-text);
+    flex-wrap: wrap;
+    row-gap: var(--ui-pagination-gap);
+}
+
+html[data-page-theme="main"] .ant-pagination :is(.ant-pagination-item, .ant-pagination-prev, .ant-pagination-next, .ant-pagination-jump-prev, .ant-pagination-jump-next) {
+    box-sizing: border-box;
+    min-width: var(--ui-pagination-size);
+    height: var(--ui-pagination-size);
+    line-height: calc(var(--ui-pagination-size) - 2px);
+    border-radius: var(--ui-pagination-radius);
+    margin-inline-end: var(--ui-pagination-gap);
+}
+
+html[data-page-theme="main"] .ant-pagination .ant-pagination-item-active {
+    background: var(--ui-surface);
+    border-color: var(--sk-active-button);
+}
+
+html[data-page-theme="main"] .ant-pagination .ant-pagination-item-active a,
+html[data-page-theme="main"] .ant-pagination .ant-pagination-item:not(.ant-pagination-disabled):hover a {
+    color: var(--sk-active-button);
+}
+
+html[data-page-theme="main"] .ant-pagination :is(.ant-pagination-options-quick-jumper, .ant-pagination-total-text) {
+    height: var(--ui-pagination-size);
+    line-height: var(--ui-pagination-size);
+}
+
+html[data-page-theme="main"] .ant-pagination :is(.ant-select, .ant-pagination-options-quick-jumper input) {
+    height: var(--ui-pagination-size);
+    font-size: var(--ui-heading-size);
+}
+
+html[data-page-theme="main"] .ant-pagination :is(.ant-select-selector, .ant-pagination-options-quick-jumper input) {
+    border-color: var(--ui-border);
+    border-radius: var(--ui-pagination-radius);
+}
+
+html[data-page-theme="main"] .ui-card {
+    border: 1px solid var(--ui-border);
+}
+
+html[data-page-theme="main"] :is(.ui-card, .ant-card) {
+    background-color: var(--ui-surface);
+    color: var(--ui-text);
+    border-color: var(--ui-border);
+    border-radius: var(--ui-card-radius);
+    box-shadow: var(--ui-card-shadow);
+    font: inherit;
+}
+
+html[data-page-theme="main"] :is(.ui-card-heading, .ant-card-head) {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    min-height: var(--ui-heading-height);
+    padding-inline: var(--ui-card-padding);
+    background-color: var(--ui-section-bg);
+    font-size: var(--ui-heading-size);
+    font-weight: var(--ui-heading-weight);
+}
+
+html[data-page-theme="main"] :is(.ui-card-body, .ant-card-body) {
+    padding: var(--ui-card-padding);
+}
+
+/* Верхнее меню: бренд, навигация, действия пользователя. */
+html[data-page-theme="main"] .ui-topmenu .ant-menu-horizontal > .ant-menu-item > .ant-menu-title-content,
+html[data-page-theme="main"] .ui-topmenu .ant-menu-horizontal > .ant-menu-submenu > .ant-menu-submenu-title > .ant-menu-title-content {
+    font-size: var(--ui-nav-tab-size);
+}
+
+html[data-page-theme="main"] .ui-topmenu-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 101;
+}
+
+html[data-page-theme="main"] :is(.ui-topmenu-brand, .ui-topmenu-actions) {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ui-bar-gap);
+    flex: none;
+}
+
+html[data-page-theme="main"] .ui-topmenu {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    gap: var(--ui-bar-gap);
+    min-height: var(--ui-nav-height);
+    padding-inline: var(--ui-bar-gutter);
+    background: var(--ui-surface);
+    border-bottom: 1px solid var(--ui-border);
+    font: var(--ui-heading-size)/1.2 var(--ui-font);
+    width: 100%;
+    height: var(--ui-nav-height);
+    margin: 0;
+    box-shadow: none;
+}
+
+html[data-page-theme="main"] .ui-topmenu-brand {
+    color: #425267;
+    font: 800 11px/1 var(--ui-font);
+    letter-spacing: .08em;
+}
+
+html[data-page-theme="main"] .ui-topmenu-brand strong {
+    font: inherit;
+    letter-spacing: inherit;
+}
+
+html[data-page-theme="main"] .ui-topmenu-brand > a {
+    display: grid;
+    place-items: center;
+    box-sizing: border-box;
+    width: 26px;
+    height: 26px;
+    border: 1px solid #9eabb9;
+    border-radius: 3px;
+    color: var(--sk-active-button);
+    background: var(--ui-surface);
+    font-size: 14px;
+    text-decoration: none;
+}
+
+html[data-page-theme="main"] .ui-topmenu-actions {
+    margin-inline-start: auto;
+    line-height: 1;
+}
+
+html[data-page-theme="main"] .ui-topmenu-user {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-sizing: border-box;
+    height: 30px;
+    min-width: 0;
+    padding: 2px 8px 2px 2px;
+    border: 1px solid #9eabb9;
+    border-radius: 3px;
+    background: var(--ui-surface);
+    color: var(--ui-text);
+    font: 600 12px/1 var(--ui-font);
+    white-space: nowrap;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+html[data-page-theme="main"] .ui-topmenu-user .ui-topmenu-initial {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    flex: none;
+    border-radius: 3px;
+    background: var(--sk-active-button);
+    color: white;
+}
+
+html[data-page-theme="main"] .ui-topmenu-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-sizing: border-box;
+    height: 30px;
+    min-width: 34px;
+    padding: 0 9px;
+    border: 1px solid var(--sk-active-button);
+    border-radius: 4px;
+    background: var(--sk-active-button);
+    color: white;
+    font: 400 12px/1 var(--ui-font);
+}
+
+/* Вторая строка: centered и date — три зоны; split — заголовок и действия;
+   filters — группы фильтров. */
+html[data-page-theme="main"] .ui-pagebar {
+    box-sizing: border-box;
+    min-width: 0;
+    min-height: var(--ui-pagebar-height);
+    align-items: center;
+    gap: var(--ui-bar-gap);
+    padding-inline: var(--ui-bar-gutter);
+    border-bottom: 1px solid var(--ui-bar-border);
+    background: var(--ui-surface);
+    color: var(--ui-text);
+    font-family: var(--ui-font);
+}
+
+html[data-page-theme="main"] :is(.ui-pagebar--centered, .ui-pagebar--date) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+
+html[data-page-theme="main"] :is(.ui-pagebar--centered, .ui-pagebar--date) > :nth-child(3) {
+    grid-column: 3;
+    justify-self: end;
+}
+
+html[data-page-theme="main"] .ui-pagebar--date > :nth-child(2) {
+    position: static;
+    transform: none;
+    justify-self: center;
+}
+
+html[data-page-theme="main"] :is(.ui-pagebar--split, .ui-pagebar--filters) {
+    display: flex;
+}
+
+html[data-page-theme="main"] :is(.ui-pagebar--split, .ui-pagebar--filters) {
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+
+html[data-page-theme="main"] .ui-pagebar :is(h1, h2, .ui-pagebar-title) {
+    margin: 0;
+    font-size: var(--ui-page-title-size);
+    font-weight: var(--ui-heading-weight);
+    line-height: 1.2;
+}
+
+/* Вводная секция информационной страницы растёт по высоте вместе с текстом. */
+html[data-page-theme="main"] .ui-page-intro {
+    font-family: var(--ui-font);
+    color: var(--ui-text);
+    border-color: var(--ui-border);
+}
+
+@media (max-width: 700px) {
+    html[data-page-theme="main"] .ui-pagebar--centered {
+        height: auto;
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+    html[data-page-theme="main"] .ui-pagebar--centered > :is(h1, h2, .ui-pagebar-title) {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        justify-self: center;
+    }
+    html[data-page-theme="main"] .ui-pagebar--centered > :nth-child(3) {
+        grid-column: 2;
+    }
+}

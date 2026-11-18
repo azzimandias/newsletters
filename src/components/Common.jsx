@@ -15,7 +15,7 @@ export function PageToolbar({ children }) {
 }
 
 export function PageHead({ title, children }) {
-  return <PageToolbar><div className="page-head"><h1>{title}</h1><Space wrap>{children}</Space></div></PageToolbar>;
+  return <PageToolbar><div className="page-head ui-pagebar ui-pagebar--split"><h1>{title}</h1><Space wrap>{children}</Space></div></PageToolbar>;
 }
 export function Blank({ title = 'Пока ничего нет', description, children }) { return <div className="blank"><Empty description={<><h3>{title}</h3><p>{description}</p></>}>{children}</Empty></div>; }
 export const pager = (data, onChange) => ({ current: data?.current_page || 1, total: data?.total || 0, pageSize: data?.per_page || 25, showSizeChanger: false, showTotal: total => `Всего: ${total}`, onChange });

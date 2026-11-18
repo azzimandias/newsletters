@@ -1,0 +1,78 @@
+/* Adapters for this app. Shared sizes and colors come from common-theme.css. */
+html[data-page-theme="main"] { --page-bg:var(--ui-alt-row); --surface:var(--ui-surface); --border:var(--ui-border); --border-strong:var(--ui-bar-border); --text:var(--ui-text); --accent:var(--sk-active-button); }
+html[data-page-theme="main"] .sticky-controls { padding:0; background:var(--ui-surface); }
+html[data-page-theme="main"] .global-header { padding-block:0; gap:var(--ui-bar-gap); }
+html[data-page-theme="main"] .global-header .ant-menu { height:calc(var(--ui-nav-height) - 1px); line-height:calc(var(--ui-nav-height) - 1px); align-self:flex-start; }
+html[data-page-theme="main"] .ui-topmenu .ant-menu-item-selected { background:transparent; color:var(--sk-active-button); border-radius:var(--ui-card-radius); }
+html[data-page-theme="main"] .ui-topmenu .ant-menu-item-selected a { color:inherit; }
+html[data-page-theme="main"] .ui-topmenu .ant-menu-item-selected::after { border-bottom-color:var(--sk-active-button); }
+html[data-page-theme="main"] .page-toolbar .page-head { padding:calc((var(--ui-pagebar-height) - var(--ui-pagination-size) - 2px) / 2) var(--ui-bar-gutter); margin:0; }
+html[data-page-theme="main"] .page-head > .ant-space { margin-left:auto; }
+html[data-page-theme="main"] .main-content { min-width:0; }
+html[data-page-theme="main"] .table-card .ant-card-body { padding:0; }
+html[data-page-theme="main"] .ant-card-head-wrapper { flex-wrap:wrap; gap:var(--ui-bar-gap); }
+html[data-page-theme="main"] .ant-card-head-title { white-space:normal; }
+html[data-page-theme="main"] .ant-table-wrapper .ant-table { font-size:var(--ui-text-size); }
+html[data-page-theme="main"] .ant-table-wrapper .ant-table-tbody > tr.ant-table-row > td { height:var(--ui-row-height); padding:var(--ui-cell-padding); line-height:1.4; white-space:nowrap; border-color:var(--ui-divider); }
+html[data-page-theme="main"] .ant-table-tbody .ant-btn { height:calc(var(--ui-row-height) - 6px); padding-block:0; font-size:var(--ui-heading-size); }
+html[data-page-theme="main"] .ant-table-tbody .ant-space { flex-wrap:nowrap; }
+html[data-page-theme="main"] .campaign-cell { display:flex; align-items:center; gap:var(--ui-bar-gap); white-space:nowrap; }
+html[data-page-theme="main"] .table-title { white-space:nowrap; }
+html[data-page-theme="main"] .table-subtitle { margin:0; font-size:var(--ui-heading-size); }
+html[data-page-theme="main"] .ant-table-thead > tr > th { white-space:nowrap; }
+html[data-page-theme="main"] .ant-table-wrapper .ant-table-tbody > tr:nth-child(even) > td { background:var(--ui-alt-row); }
+html[data-page-theme="main"] .ant-table-wrapper .ant-table-tbody > tr:hover > td { background:var(--ui-hover-row) !important; }
+html[data-page-theme="main"] .ant-table-wrapper .ant-table-pagination { margin:0 !important; }
+html[data-page-theme="main"] .ant-btn-primary:not(:disabled,.ant-btn-dangerous):hover { background:var(--sk-active-button-hover) !important; }
+html[data-page-theme="main"] .campaigns-table .campaign-filter { color:var(--ui-heading-text); }
+html[data-page-theme="main"] .campaigns-table .campaign-filter :is(input,.ant-select-selector) { color:var(--ui-heading-text); }
+html[data-page-theme="main"] .members-toolbar { display:flex; flex-wrap:wrap; gap:var(--ui-bar-gap); padding:var(--ui-bar-gutter); background:var(--ui-surface); }
+@media(max-width:650px) {
+ html[data-page-theme="main"] .sticky-controls { position:sticky; top:0; }
+ html[data-page-theme="main"] .global-header { height:auto; }
+ html[data-page-theme="main"] .page-head > .ant-space { margin-left:0; }
+ html[data-page-theme="main"] .ant-card-head-wrapper { padding-block:var(--ui-bar-gutter); }
+ html[data-page-theme="main"] .ant-card-extra { max-width:100%; margin-left:0; }
+ html[data-page-theme="main"] .ant-card-extra .ant-space { flex-wrap:wrap; }
+}
+
+/* Fill the table's allotted space, without stretching the 31px data rows. */
+html[data-page-theme="main"] .app-shell { min-height:100dvh; }
+html[data-page-theme="main"] .main-content { display:flex; flex-direction:column; flex:1; }
+html[data-page-theme="main"] .page-content { min-width:0; }
+html[data-page-theme="main"] .page-content--table { display:flex; flex-direction:column; flex:1; }
+html[data-page-theme="main"] .page-content--table > .table-card { display:flex; flex-direction:column; flex:1; margin-bottom:0; }
+html[data-page-theme="main"] .page-content--table > .table-card > .ant-card-body { display:flex; flex-direction:column; flex:1; }
+html[data-page-theme="main"] .ant-table-wrapper { display:flex; flex-direction:column; flex:1; min-width:0; background:var(--ui-surface); }
+html[data-page-theme="main"] .ant-table-wrapper > .ant-spin-nested-loading,
+html[data-page-theme="main"] .ant-table-wrapper > .ant-spin-nested-loading > .ant-spin-container { display:flex; flex-direction:column; flex:1; min-width:0; }
+html[data-page-theme="main"] .ant-table-wrapper .ant-table { flex:1; min-height:calc(var(--ui-heading-height) + 8 * var(--ui-row-height)); background:var(--ui-surface); }
+html[data-page-theme="main"] .ant-table-wrapper .ant-table-pagination { flex:none; margin-top:auto !important; }
+html[data-page-theme="main"] .ant-table-wrapper .ant-table-container { min-height:inherit; }
+html[data-page-theme="main"] .page-content--table > .blank { flex:1; background:var(--ui-surface); border:1px solid var(--ui-border); }
+html[data-page-theme="main"] .ui-topmenu .ant-menu-item-selected::after { border-bottom-width:2px; }
+
+/* Keep the active underline inside the menu, above its continuous divider. */
+html[data-page-theme="main"] .ui-topmenu .ant-menu-horizontal > :is(.ant-menu-item,.ant-menu-submenu)::after { bottom:3px; }
+html[data-page-theme="main"] .sticky-controls { border-bottom:0; }
+html[data-page-theme="main"] .page-toolbar .campaign-heading {
+ min-height:var(--ui-pagebar-height);
+ padding:calc((var(--ui-pagebar-height) - var(--ui-pagination-size) - 2px) / 2) var(--ui-bar-gutter);
+ gap:var(--ui-bar-gap);
+ border-bottom:1px solid var(--ui-bar-border);
+}
+html[data-page-theme="main"] .campaign-identity h1 { font-size:var(--ui-page-title-size); font-weight:var(--ui-heading-weight); }
+
+/* Ant Design offsets horizontal items over the menu border by default.
+   This header owns its divider, so keep items entirely inside its content box. */
+html[data-page-theme="main"] .ui-topmenu .ant-menu-horizontal > :is(.ant-menu-item, .ant-menu-submenu) {
+ top:0;
+ margin-top:0;
+ margin-bottom:0;
+ height:calc(var(--ui-nav-height) - 1px);
+ line-height:calc(var(--ui-nav-height) - 1px);
+}
+html[data-page-theme="main"] .ui-topmenu .ant-menu-horizontal > .ant-menu-item-selected,
+html[data-page-theme="main"] .ui-topmenu .ant-menu-horizontal > .ant-menu-item-selected:hover {
+ background:transparent;
+}
